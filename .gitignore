@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Datasets
+resnet_fromscratch/train_images/
+resnet_fromscratch/test_images/
+
+# Compressed datasets
+*.rar
+
+# Model checkpoints
+# Uncomment if you don't want model files in GitHub
+# *.pth
