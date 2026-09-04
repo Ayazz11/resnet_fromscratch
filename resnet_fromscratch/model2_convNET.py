@@ -341,12 +341,11 @@ model.eval()
 
 preds = []
 
-# ✅ FIX 1: get mapping properly
 idx_to_class = full_dataset.idx_to_class   # correct mapping
 
 with torch.no_grad():
     for images, names in test_loader:
-        images = images.to(device)   # ✅ FIX 2: device (not DEVICE)
+        images = images.to(device)  
 
         outputs = model(images)
         pred = outputs.argmax(dim=1).cpu().numpy()
@@ -355,7 +354,6 @@ with torch.no_grad():
 # Convert predictions to labels
 labels = [idx_to_class[p] for p in preds]
 
-# ✅ FIX 3: KEEP ORIGINAL IDs (NO stripping zeros)
 test_ids = [img.replace(".png", "").replace(".jpg", "") 
             for img in test_dataset.images]
 
@@ -365,10 +363,10 @@ submission = pd.DataFrame({
     "label": labels
 })
 
-# ✅ IMPORTANT: sort lexicographically (as strings)
+
 submission = submission.sort_values("id")
 
 # Save
 submission.to_csv("/kaggle/working/submission.csv", index=False)
 
-print("✅ submission.csv created successfully!")
+print("submission.csv created successfully!")
